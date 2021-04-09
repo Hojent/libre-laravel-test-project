@@ -1,10 +1,10 @@
 @extends('admin.layout')
 @section('title')
-    @lang('headers.edit_category')
+    @lang('headers.edit')
 @endsection
 {{-- admin.errors included in admin.layout --}}
 @section('content')
-    {{Form::open(['route'=>['categories.update',$category->id], 'method'=>'put'])}}
+    {{Form::open(['route'=>['authors.update',$author->id], 'method'=>'put'])}}
     <div class="card-body">
 
         <div class="form-group row">
@@ -12,12 +12,12 @@
                 @lang('messages.name')
             </label>
             <div class="col-sm-9">
-                <input type="text" class="form-control" id="fname" value="{{$category->title}}"  name="title">
+                <input type="text" class="form-control" id="fname" value="{{$author->name}}"  name="name">
             </div>
         </div>
 
         <div>
-            <a class="btn btn-info" href="{{ route('categories.index') }}">@lang('messages.back')</a>
+            <a class="btn btn-info" href="{{ route('authors.index') }}">@lang('messages.back')</a>
             <button class="btn btn-success pull-right">
                 @lang('messages.change')
             </button>

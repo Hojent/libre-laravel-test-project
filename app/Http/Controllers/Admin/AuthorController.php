@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller,    
+use App\Author;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class AuthorController extends Controller
@@ -18,8 +19,8 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
-        return view('admin.categories.index', ['categories' => $categories]);
+        $authors = Author::all();
+        return view('admin.authors.index', ['authors' => $authors]);
     }
 
     /**
@@ -29,7 +30,7 @@ class AuthorController extends Controller
      */
     public function create()
     {
-        return view('admin.categories.create');
+        return view('admin.authors.create');
     }
 
     /**
@@ -41,23 +42,23 @@ class AuthorController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'title' => 'required'
+            'name' => 'required'
         ]);
-        Category::create($request->all());
-        return redirect(route('categories.index'));
+        Author::create($request->all());
+        return redirect(route('authors.index'));
     }
 
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Category  $category
+     * @param  \App\Author  $author
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit(Author $author)
     {
-        return view('admin.categories.edit', [
-            'category' => $category
+        return view('admin.authors.edit', [
+            'author' => $author
         ]);
     }
 
@@ -65,27 +66,27 @@ class AuthorController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Category  $category
+     * @param  \App\Author  $author
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, Author $author)
     {
         $this->validate($request, [
-            'title'	=>	'required' //обязательно
+            'name'	=>	'required' //обязательно
         ]);
-        $category->update($request->all());
-        return redirect(route('categories.index'));
+        $author->update($request->all());
+        return redirect(route('authors.index'));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Category  $category
+     * @param  \App\Author $author
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy(Author $author)
     {
-        $category->delete();
-        return redirect()->route('categories.index');
+        $author->delete();
+        return redirect()->route('authors.index');
     }
 }
