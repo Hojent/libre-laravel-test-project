@@ -18,6 +18,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' =>'auth'
         Route::resource('/authors', 'AuthorController');
         Route::get('/author/{id}/books', 'BookController@author')->name('author_books');
 //user profile part
+        Route::get('/profile', 'ProfileController@index')->name('profile.index');
+        Route::get('/profile/edit', 'ProfileController@edit')->name('profile.edit');
+        Route::put('/profile', 'ProfileController@update')->name('profile.update');
     });
 
 //-----
