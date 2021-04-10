@@ -7,6 +7,8 @@ Route::get('/', 'HomeController@index')->name('home');
 //Blog & Documents
 Route::get('/books/', 'BookController@index')->name('books');
 Route::get('/books/{id}', 'BookController@show')->name('book');
+// Ajax Data
+Route::get('load-more-data','BookController@more_data');
 //-----
 //Auth::routes();
 Auth::routes(['register' => false]);

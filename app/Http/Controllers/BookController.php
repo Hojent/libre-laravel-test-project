@@ -42,4 +42,16 @@ class BookController extends Controller
        ]);
     }
 
+    // Fetch More Data
+    function more_data(Request $request){
+        if($request->ajax()){
+            $skip=$request->skip;
+            $take=6;
+            $books=Book::skip($skip)->take($take)->get();
+            return response()->json($books);
+        }else{
+            return response()->json('Direct Access Not Allowed!!');
+        }
+    }
+
 }
