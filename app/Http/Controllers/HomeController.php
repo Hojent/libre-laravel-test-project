@@ -23,7 +23,7 @@ class HomeController extends Controller
     {
         $authors = Author::pluck('name', 'id');
         $books = Book::all()->take(3)
-            ->sortByDesc('created_at')
+            ->sortByDesc('updated_at')
            ;
 
         return view('home', [

@@ -1,6 +1,6 @@
 @extends('admin.layout')
 @section('title')
-    @lang('headers.admin_title')
+    {{$user->name}}
 @endsection
 {{-- admin.errors included in admin.layout --}}
 @section('content')
@@ -24,22 +24,7 @@
                 <input type="text" class="form-control" value="{{$user->email}}"  name="email">
             </div>
         </div>
-        <div class="form-group row">
-            <label class="col-sm-3 text-right control-label col-form-label">
-                Город
-            </label>
-            <div class="col-sm-9">
-                <input type="text" class="form-control" value="{{$user->city}}"  name="city">
-            </div>
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-3 text-right control-label col-form-label">
-                Телефон
-            </label>
-            <div class="col-sm-9">
-                <input type="text" class="form-control" value="{{$user->phone}}"  name="phone">
-            </div>
-        </div>
+
         <div>
             <a class="btn btn-info" href="{{ route('profile.index') }}">@lang('messages.back')</a>
             <button class="btn btn-success pull-right">
