@@ -11,7 +11,7 @@
     <div class="col-md-6">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Последние действия (update)</h4>
+                <h4 class="card-title">Последние действия</h4>
             </div>
             <div class="comment-widgets scrollable">
                 <!-- Comment Row -->
@@ -19,7 +19,7 @@
                 <div class="d-flex flex-row comment-row m-t-0">
                     <div class="p-2"><img src="{{$last->getImage()}}" alt="" width="50" class="rounded-circle"></div>
                     <div class="comment-text w-100">
-                        <h6 class="font-medium">{{$lastcar->title}}</h6>
+                        <h6 class="font-medium">{{$last->title}}</h6>
                         <span class="m-b-15 d-block"><b>{{$last->author->name}}</b><br>
 
 

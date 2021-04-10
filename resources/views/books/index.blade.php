@@ -16,7 +16,7 @@
         <div class="container">
             <div class="row ">
                 @foreach($books as $book)
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <div class=" float-left m-2 mr-3">
                             <div class="img " >
                                 <img src="{{$book->getImage()}}">
@@ -24,7 +24,7 @@
                         </div>
                         <div class="text ">
                             <p><a href="#">{{$book->author['name']}}</a></p>
-                            <h3><a href="#">{{$book->title}}</a></h3>
+                            <h4><a href="#">{{$book->title}}</a></h4>
                         </div>
 
                     </div>

@@ -22,8 +22,8 @@ class HomeController extends Controller
     public function index()
     {
         $authors = Author::pluck('name', 'id');
-        $books = Book::all()->take(4)
-            ->sortBy('created_at')
+        $books = Book::all()->take(3)
+            ->sortByDesc('created_at')
            ;
 
         return view('home', [
