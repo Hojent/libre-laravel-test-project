@@ -63,20 +63,20 @@
                             $(".load-more").html('Loading...');
                         },
                         success:function(response){
-                            var _html='';
-                            var image="{{ asset('imgs') }}/";
+                            var _html=''; console.log('000000000');
+                            var image='uploads/';
                             $.each(response,function(index,value){
-                                _html+='<div class="col-sm-4 mb-3 product-box">';
-                                _html+='<img src="'+image+value.image+'" class="card-img-top" alt="'+value.title+'" />';
-                                _html+='<div class="card">';
-                                _html+='<div class="card-body">';
-                                _html+='<h5 class="card-title">'+value.id+'. '+value.title+'</h5>';
-                                _html+='<p class="card-text">'+value.summer+'</p>';
-                                _html+='Price: <span class="badge badge-secondary">'+value.price+'</span>';
+                                _html+='<div class="col-md-6 book-box">';
+                                _html+='<div class=" float-left m-2 mr-3">';
+                                _html+='<div class="img"><img src="'+image+value.image+'"/></div>';
+                                _html+='</div>';
+                                _html+='<div class="text">';
+                                _html+='<p><a href="#">'+value.author_id+'</a></p>';
+                                _html+='<h4>'+value.title+'</h4>';
                                 _html+='</div>';
                                 _html+='</div>';
-                                _html+='</div>';
-                            });
+                              });
+                            console.log(_html);
                             $(".book-list").append(_html);
                             // Change Load More When No Further result
                             var _totalCurrentResult=$(".book-box").length;
@@ -86,7 +86,7 @@
                             if(_totalCurrentResult==_totalResult){
                                 $(".load-more").remove();
                             }else{
-                                $(".load-more").html('Load More');
+                                $(".load-more").html('Загрузить еще');
                             }
                         }
                     });

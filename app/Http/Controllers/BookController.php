@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Book;
+use Illuminate\Support\Facades\Log;
 
 class BookController extends Controller
 
@@ -46,8 +47,11 @@ class BookController extends Controller
     function more_data(Request $request){
         if($request->ajax()){
             $skip=$request->skip;
-            $take=6;
+            $take=2;
             $books=Book::skip($skip)->take($take)->get();
+            foreach ($books as $book) {
+                $book->author_id = $book->author->name;
+            }
             return response()->json($books);
         }else{
             return response()->json('Direct Access Not Allowed!!');
