@@ -30,8 +30,8 @@
                                 </div>
                         </div>
                          <div class="text ">
-                            <p><a href="#">{{$book->author['name']}}</a></p>
-                             <h4><a href="#">{{$book->title}}</a></h4>
+                            <p>{{$book->author['name']}}</p>
+                             <h4><a href="{{route('book', $book->id)}}">{{$book->title}}</a></h4>
                         </div>
 
                     </div>
