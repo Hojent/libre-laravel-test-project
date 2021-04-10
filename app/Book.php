@@ -7,9 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Book extends Model
 {
-    const IS_DRAFT = 0;
-    const IS_PUBLIC = 1;
-
     protected $guarded = ['id'];
 
     public function author()
@@ -19,12 +16,11 @@ class Book extends Model
 
     public static function add($fields)
     {
-        $post = new static;
-        $post->fill($fields);
-        $post->user_id = 1;
-        $post->save();
+        $book = new static;
+        $book->fill($fields);
+        $book->save();
 
-        return $post;
+        return $book;
     }
 
     public function edit($fields)
@@ -62,18 +58,17 @@ class Book extends Model
     public function getImage()
     {
         if ($this->image == null) {
-            return '/images/no-image.gif';
-        }
-
+            return '/uploads/no-img.png';
+        } else {
         return '/uploads/' . $this->image;
-
+        }
     }
 
     public function getAuthor()
     {
-        return ($this->category != null)
-            ? $this->category->title
-            : 'Нет категории';
+        return ($this->author != null)
+            ? $this->author->name
+            : 'автор не указан';
     }
 
     public function getAuthorID()

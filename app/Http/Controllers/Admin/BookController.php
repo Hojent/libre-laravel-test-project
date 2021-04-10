@@ -28,12 +28,14 @@ class BookController extends Controller
      */
     public function create()
     {
-        $categories = Category::pluck('title','id');
-        $tags = Tag::pluck('title','id');
-        return view('admin.posts.create', [
-            'tags' => $tags,
-            'categories' => $categories,
-        ]);
+        try {
+            $authors = Author::pluck('name', 'id');
+            return view('admin.books.create', [
+                'authors' => $authors,
+            ]);
+        } catch (\Exception $exception) {
+            echo ('Create book controller: error :' . $exception->getMessage());
+        }
     }
 
     /**
@@ -47,82 +49,77 @@ class BookController extends Controller
 
         $this->validate($request, [
            'title' => 'required',
-           'content' => 'required',
+            'author_id' => 'required|numeric',
+        ],
+            [   'title.required' => 'Введите заголовок',
+                'author_id.required' => 'Укажите автора',
         ]);
-        $post = Post::add($request->all());
-        $post->uploadImage($request->file('image'));
-        $post->setCategory($request->get('category_id'));
-        $post->setTags($request->get('tags'));
-        $post->toggleStatus($request->get('status'));
-        $post->toggleFeatured($request->get('is_featured'));
-
-        return redirect(route('posts.index'));
+        $book = Book::add($request->all());
+        $book->uploadImage($request->file('image'));
+        $book->setAuthor($request->get('author_id'));
+        return redirect(route('books.index'));
     }
 
      /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Post  $post
+     * @param  \App\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit(Book $book)
     {
-        $categories = Category::pluck('title','id');
-        $tags = Tag::pluck('title','id');
-        $selectedtags = $post->tags->pluck('id')->all();
-        $category = $post->getCategoryID();
-        return view('admin.posts.edit', compact(
-            'categories',
-            'tags',
-            'post',
-            'selectedtags',
-            'category'
+        try {
+        $authors = Author::pluck('name','id');
+        $author = $book->getAuthorID();
+        return view('admin.books.edit', compact(
+            'authors',
+            'book',
+            'author'
         ));
+        } catch (\Exception $exception) {
+            echo ('Edit book controller: SQL error :' . $exception->getMessage());
+        }
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Post  $post
+     * @param  \App\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, Book $book)
     {
         $this->validate($request, [
             'title'	=>	'required',
-            'content' => 'required',
-        ]);
-        $post->update($request->all());
-        $post->uploadImage($request->file('image'));
-        $post->setCategory($request->get('category_id'));
-        $post->setTags($request->get('tags'));
-        $post->toggleStatus($request->get('status'));
-        $post->toggleFeatured($request->get('is_featured'));
 
-        return redirect(route('posts.index'));
+        ]);
+        $book->update($request->all());
+        $book->uploadImage($request->file('image'));
+        $book->setAuthor($request->get('author_id'));
+
+        return redirect(route('books.index'));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Post  $post
+     * @param  \App\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy(Book $book)
     {
-        $post->remove();
-        return redirect()->route('posts.index');
+        $book->remove();
+        return redirect()->route('books.index');
     }
 
-    public function category($category_id)
+    public function author($author_id)
     {
-        $posts = Post::where('category_id', '=', $category_id)->get();
-        $categoryTitle = $posts->first()->getCategory() ?? 'empty';
-        return view('admin.posts.index', [
-            'posts' => $posts,
-            'cid' => $category_id,
-            'categoryTitle' => $categoryTitle,
+        $books = Book::where('author_id', '=', $author_id)->get();
+        $authorName = $books->first()->getAuthor() ?? 'empty';
+        return view('admin.books.index', [
+            'books' => $books,
+            'authorTitle' => $authorName,
         ]);
     }
 }
