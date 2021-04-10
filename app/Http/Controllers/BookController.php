@@ -18,7 +18,7 @@ class BookController extends Controller
     public function index()
     {
 
-        $books = Book::all()
+        $books = Book::take(self::BLOG_PAGES)->get()
             ->sortBy('title')
             //->paginate(self::BLOG_PAGES)
         ;
