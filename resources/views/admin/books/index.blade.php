@@ -58,6 +58,8 @@
                                @lang('messages.add')
                            </a>
                     </div>
+
+                    {{$books->links()}}
                 </div>
 
             </div>
