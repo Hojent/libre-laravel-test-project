@@ -2,7 +2,6 @@
 
 @section('content')
 
-
         <div class="container">
             <div class="row justify-content-start align-items-center">
                 <div class="col-lg-6 col-md-6 d-flex align-items-end">
@@ -15,7 +14,7 @@
             </div>
         </div>
 
-    <section class="ftco-section">
+    <section class="section">
         <div class="container-fluid px-4">
             <div class="row justify-content-center">
                 <div class="col-md-12 heading-section text-center mb-5">
@@ -24,24 +23,18 @@
             </div>
             <div class="row flex-row">
                @foreach($books as $book)
-                <div class="flex-wrap col-md-3">
-                    <div class="car-wrap ftco-animate">
-                        <div class="img d-flex align-items-end"
-                             style="background-image: url({{$book->getImage()}});"
-                        >
+                   <div class="col-md-3">
+                        <div class=" float-left m-2 mr-3">
+                                <div class="img " >
+                                    <img src="{{$book->getImage()}}">
+                                </div>
+                        </div>
+                         <div class="text ">
+                            <p><a href="#">{{$book->author['name']}}</a></p>
+                             <h3><a href="#">{{$book->title}}</a></h3>
+                        </div>
 
-                        </div>
-                        <div class="text p-4 text-center">
-                            <h2 class="mb-0"><a href="#">Автор: {{$author->name}}</a></h2>
-                            <span>{{$book->title}}</span>
-                            <p class="d-flex mb-0 d-block">
-                              {{-- <a href="{{route('car', $car->id)}}" class="btn btn-black btn-outline-black ml-1">--}}
-                                   См.книгу
-                               {{--</a>--}}
-                            </p>
-                        </div>
                     </div>
-                </div>
                @endforeach
             </div>
         </div>
